@@ -1,9 +1,18 @@
 const http = require('http');
+const fs = require('fs');
 
-const moduleConfig = require('./mmodule/config');
+const configs = require('./mmodule/config');
 
-http.createServer((req, res) => {
-	res.statusCode = 200;
-	res.setHeader('Content-Type','text/html');
-	res.end('<h1>Hello NodeJS 123</h1>\n');
-}).listen(moduleConfig.port);
+function onRequest(req,res){
+	fs.readFile('./home.html', (err, data) => {
+		if (err){
+			res.writeHead(404);
+			res.write('File not found');
+		}else{
+			res.write(data);
+		}
+		res.end();
+	});
+}
+
+http.createServer(onRequest).listen(configs.port);
