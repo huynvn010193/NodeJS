@@ -9,9 +9,5 @@
 // module.exports.port = port;
 
 module.exports = {
-  show: function (){
-    console.log('Hello Moudle');
-  },
-  hostname: '127.0.0.1',
-  port: 6969
+  port: 3000
 }
