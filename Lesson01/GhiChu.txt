@@ -1,2 +1,2 @@
 14/09/2018: 
-    NodeJS tập hợp rất nhiều modul => Muốn sử dụng mudul nào ta dùng require.
+  NodeJS tập hợp rất nhiều modul => Muốn sử dụng mudul nào ta dùng require.
