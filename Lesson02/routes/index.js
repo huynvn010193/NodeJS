@@ -3,8 +3,14 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  console.log('getIndex');
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'HomePage' });
 });
+
+/* GET Dashboard page*/
+router.get('/dashboard', function(req, res, next) {
+  res.render('dashboard', { title: 'Dashboard Page' });
+});
+
+
 
 module.exports = router;
