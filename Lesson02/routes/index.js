@@ -11,6 +11,4 @@ router.get('/dashboard', function(req, res, next) {
   res.render('dashboard', { title: 'Dashboard Page' });
 });
 
-
-
 module.exports = router;
