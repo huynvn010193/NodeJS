@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+// User express layout
 var expressLayouts = require('express-ejs-layouts');
 
 var indexRouter = require('./routes/index');
@@ -16,6 +17,9 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(expressLayouts);
+
+// Set layout sử dụng 'express-ejs-layouts'
+app.set('layout','backend');
 
 app.use(logger('dev'));
 app.use(express.json());
