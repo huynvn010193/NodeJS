@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/list', function(req, res, next) {
+router.get('/', function(req, res, next) {
   res.render('page/items/list', { pageTitle: 'Item List Page' });
 });
 
