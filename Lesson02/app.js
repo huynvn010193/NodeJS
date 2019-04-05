@@ -7,12 +7,17 @@ var logger = require('morgan');
 // User express layout
 var expressLayouts = require('express-ejs-layouts');
 
+const systemConfig = require('./configs/system');
+
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(expressLayouts);
+
+// Local variable
+app.locals.prefixAdmin = systemConfig.prefixAdmin;
 
 // Set layout sử dụng 'express-ejs-layouts'
 app.set('layout','backend');
@@ -24,13 +29,15 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Set up Router
-app.use('/admin',require('./routes/backend/index'));
+app.use(`/${systemConfig.prefixAdmin}`,require('./routes/backend/index'));
 app.use('/',require('./routes/frontend/index'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
+
 
 // error handler
 app.use(function(err, req, res, next) {
