@@ -10,9 +10,10 @@ var expressLayouts = require('express-ejs-layouts');
 var mongoose = require('mongoose');
 
 const systemConfig = require('./configs/system');
+const ItemModel = require('./schemas/items');
 
 // Code Connect MongoDB use mongoosejs
-mongoose.connect('mongodb+srv://huynvn_123:01227679927@cluster0-zjdfb.gcp.mongodb.net/test?retryWrites=true',{ useNewUrlParser: true });
+mongoose.connect('mongodb+srv://huynvn_123:01227679927@cluster0-zjdfb.gcp.mongodb.net/tranningNodeJS?retryWrites=true',{ useNewUrlParser: true });
 var db = mongoose.connection;
 db.on('error',() => { console.log('error connection');
 });
@@ -20,18 +21,9 @@ db.once('open',() => {
   console.log('connected');
 });
 
-// Tạo phần định nghĩa
-var kittySchema = new mongoose.Schema({
-  name: String
-});
-
-// Tạo 1 model 
-var Kitten = mongoose.model('Kitten',kittySchema);
-
-// Tạo 1 đối tượng Kitten
-var silence = new Kitten({ name: '123'});
-silence.save(function (err, fluffy) {
-  if (err) return console.error(err);
+ItemModel.find({ }, (error,item) => {
+  console.log("error",error);
+  console.log("items",item);
 });
 
 var app = express();
