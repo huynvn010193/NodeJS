@@ -10,7 +10,7 @@ var expressLayouts = require('express-ejs-layouts');
 var mongoose = require('mongoose');
 
 const systemConfig = require('./configs/system');
-const ItemModel = require('./schemas/items');
+//const ItemModel = require('./schemas/items');
 
 // Code Connect MongoDB use mongoosejs
 mongoose.connect('mongodb+srv://huynvn_123:01227679927@cluster0-zjdfb.gcp.mongodb.net/tranningNodeJS?retryWrites=true',{ useNewUrlParser: true });
@@ -21,10 +21,10 @@ db.once('open',() => {
   console.log('connected');
 });
 
-ItemModel.find({ }, (error,item) => {
-  console.log("error",error);
-  console.log("items",item);
-});
+// ItemModel.find({ }, (error,item) => {
+//   console.log("error",error);
+//   console.log("items",item);
+// });
 
 var app = express();
 
