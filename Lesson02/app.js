@@ -12,7 +12,7 @@ var mongoose = require('mongoose');
 const systemConfig = require('./configs/system');
 //const ItemModel = require('./schemas/items');
 
-// Code Connect MongoDB use mongoosejs
+// TODO Code Connect MongoDB use mongoosejs
 mongoose.connect('mongodb+srv://huynvn_123:01227679927@cluster0-zjdfb.gcp.mongodb.net/tranningNodeJS?retryWrites=true',{ useNewUrlParser: true });
 var db = mongoose.connection;
 db.on('error',() => { console.log('error connection');
@@ -36,7 +36,7 @@ app.use(expressLayouts);
 // Local variable
 app.locals.prefixAdmin = systemConfig.prefixAdmin;
 
-// Set layout sử dụng 'express-ejs-layouts'
+// TODO Set layout sử dụng 'express-ejs-layouts'
 app.set('layout','backend');
 
 app.use(logger('dev'));
@@ -45,7 +45,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Set up Router
+// TODO Set up Router
 app.use(`/${systemConfig.prefixAdmin}`,require('./routes/backend/index'));
 app.use('/',require('./routes/frontend/index'));
 
