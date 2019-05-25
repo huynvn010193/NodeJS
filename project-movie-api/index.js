@@ -1,11 +1,14 @@
 let express = require('express');
 let app = express();
 
+let MovieStore = require('./moviestore');
+let movieStore = new MovieStore();
+
 let indexHandler = (req,res) => {
-	return res.send('hello world');
+	return res.send(movieStore.all());
 }
 
-app.get('/',indexHandler);
+app.get('/movies',indexHandler);
 
 app.get('/bye',(req,res) => {
 	return res.send('bye bye, see you again');
