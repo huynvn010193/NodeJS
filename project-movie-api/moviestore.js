@@ -11,6 +11,10 @@ class MovieStore{
 	find(title){
 		return this.movieData.filter(m => m.Title === title);
 	}
+
+	add(movie) {
+		this.movieData.push(movie);
+	}
 }
 
 module.exports = MovieStore;
