@@ -34,6 +34,19 @@ app.get('/movies/:title', (req,res) => {
 });
 
 app.post('/movies',(req,res) => {
+	if(!req.body.Title || req.body.Title.trim().length < 1) {
+		res.statusCode = 400;
+		return res.send({
+			message: 'missing or invalid title'
+		});
+	}
+	console.log("TCL: movieStore.has(req.body.Title)", movieStore.has(req.body.Title));
+	if(movieStore.has(req.body.Title)) {
+		res.statusCode = 400;
+		return res.send({
+			message: 'movie already existed'
+		});
+	}
 	movieStore.add(req.body);
 	return res.send({
 		message: "movie added successfully"
