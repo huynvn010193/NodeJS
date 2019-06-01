@@ -11,6 +11,7 @@ let MovieStore = require('./moviestore');
 let movieStore = new MovieStore();
 
 app.get('/movies',(req,res) => {
+	console.log(req.query);
 	return res.send(movieStore.all());
 });
 
