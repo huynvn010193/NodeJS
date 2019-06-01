@@ -21,6 +21,11 @@ class MovieStore{
 		return foundMovie.length > 0;
 	}
 
+	search(title) {
+		let searchTitle = this.movieData.filter(m => m.Title.includes(title));
+		return searchTitle;
+	}
+
 	update(title,newInfo) {
 		// Kiểm tra movie với title có tồn tại ko ?
 		// nếu 0 => return false

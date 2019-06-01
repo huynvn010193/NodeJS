@@ -11,8 +11,11 @@ let MovieStore = require('./moviestore');
 let movieStore = new MovieStore();
 
 app.get('/movies',(req,res) => {
-	console.log(req.query);
-	return res.send(movieStore.all());
+	let movies = movieStore.search(req.query.title);	
+	
+	return res.send({
+		payload: movies
+	});
 });
 
 // redirect trang index
@@ -78,7 +81,6 @@ app.delete('/movies/:title', (req,res) => {
 		message: 'delete movie successfully'
 	})
 });
-
 
 app.listen(8080,() => {
 	console.log('server started at: 127.0.0.1:8080');
