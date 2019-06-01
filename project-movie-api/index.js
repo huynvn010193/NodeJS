@@ -40,7 +40,6 @@ app.post('/movies',(req,res) => {
 			message: 'missing or invalid title'
 		});
 	}
-	console.log("TCL: movieStore.has(req.body.Title)", movieStore.has(req.body.Title));
 	if(movieStore.has(req.body.Title)) {
 		res.statusCode = 400;
 		return res.send({
@@ -51,6 +50,18 @@ app.post('/movies',(req,res) => {
 	return res.send({
 		message: "movie added successfully"
 	});
+});
+
+app.put('/movies/:title', (req,res) => {
+	if(!movieStore.update(req.params.title,req.body)) {
+		res.statusCode = 500;
+		return res.send({
+			message: 'failed to update movie info'	
+		});
+	}
+	return res.send({
+		message: 'update movie successfully'
+	})
 });
 
 app.listen(8080,() => {
