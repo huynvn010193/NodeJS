@@ -94,6 +94,10 @@ app.delete('/movies/:title', (req,res) => {
 	})
 });
 
+app.get('/test',(req,res) => {
+	return res.json('value');
+});
+
 app.listen(8080,() => {
 	console.log('server started at: 127.0.0.1:8080');
 });
