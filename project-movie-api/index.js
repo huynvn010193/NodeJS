@@ -10,11 +10,23 @@ app.use(bodyParser.json({
 let MovieStore = require('./moviestore');
 let movieStore = new MovieStore();
 
+function paginate(data,size,page) {
+	let index = page - 1;
+	return data.slice(index * size,(index + 1)*size);
+}
+
 app.get('/movies',(req,res) => {
 	let movies = movieStore.search(req.query.title);	
-	
+	let page = parseInt(req.query.page || 1),
+	size = parseInt(req.query.size || 2);	
+	let results = paginate(movies,size,page);
+
 	return res.send({
-		payload: movies
+		title: req.query.title,
+		totalPage: movies.length,
+		page: page,
+		size: size,
+		payload: results
 	});
 });
 

@@ -1,5 +1,5 @@
 let a = "Happy New Year, happy new year",
-    b = 'new';
+  b = 'new';
 
 console.log(a.indexOf(b) >= 0);
 
