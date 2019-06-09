@@ -15,15 +15,9 @@
       <div class="panel-body">
         <div class="row">
           <div class="status-list col-sm-6 pl0">
-            <%
-              statusFilter.forEach((item) => {
-            %>
-              <a class="btn m-b-sm btn-<%=item.class%> btn-sm" href="admin123/item/all">
-                <%= item.name.toUpperCase() + " ("+item.count+")" %>
-              </a>  
-            <%
-              })
-            %>              
+            <! --Filter status-->
+            <% include ./../../helpers/filter-status %>
+            <%= filterStatusHelper(statusFilter) %>
             </a>
           </div>
           <div class="col-sm-6">
