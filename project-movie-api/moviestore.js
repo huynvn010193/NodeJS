@@ -1,6 +1,6 @@
 class MovieStore{
 	constructor(){
-		// Lưu tất cả thông tin vào biến movieData
+		// Lưu tất cả thông tin vào biến movieData 
 		this.movieData = require('./datastore.json');
 	}
 
