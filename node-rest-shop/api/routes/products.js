@@ -6,8 +6,23 @@ const mongoose = require('mongoose');
 
 
 router.get('/', (req, res, next) => {
-    res.status(200).json({
-        message: 'Handling GET request to /product'
+    Product.find()
+    .exec()
+    .then(docs =>  {
+        console.log(docs);
+        if(docs.length >= 0) {
+            res.status(200).json(docs);
+        } else {
+            res.status(404).json({
+                message: "No entries found"
+            })
+        }
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({
+            error: err
+        });
     });
 });
 
@@ -42,31 +57,54 @@ router.get('/:productId', (req, res, next) => {
     .then(doc => {
         console.log(doc);
         if(doc) {
+            console.log("asddaad");
             res.status(200).json(doc);
         } else {
+            console.log("asddaad");
             res.status(404).json({
                 message: 'No valid entry found for provider ID'
             })
         }
     })
     .catch(err => {
-        console.log(err);
         res.status(500).json({error: err})
     })
 });
 
 router.patch('/:productId', (req, res, next) => {
-    res.status(200).json({
-        message: 'Update product',
-        id: id
+    const id = req.params.productId;
+    const updateOps = {};
+    for(const ops of req.body) {
+        console.log("ops",ops);
+        updateOps[ops.propName] = ops.value;
+        console.log("updateOps",updateOps);
+    }
+    console.log("TCL: updateOps", updateOps)
+    Product.update({ _id: id }, { $set: updateOps })
+    .exec()
+    .then(result => {
+        console.log(result);
+        res.status(200).json({result})
     })
+    .catch(err => {
+        res.status(500).json({ error: err })
+    });
 });
 
 
-router.delete('/:productId', (req, res, next) => {
-    res.status(200).json({
-        message: 'Delete product',
-        id: id
+router.delete("/:productId", (req, res, next) => {
+    const id = req.params.productId;
+    console.log("id",id);
+    Product.remove({ _id: id })
+    .exec()
+    .then(result => {
+        res.status(200).json(result);
+    })
+    .catch(err => {
+        console.log(err);
+        res.status(500).json({
+            error: err
+        })
     })
 });
 
