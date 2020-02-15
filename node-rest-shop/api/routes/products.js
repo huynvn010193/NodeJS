@@ -50,25 +50,34 @@ router.post('/', (req, res, next) => {
    
 });
 
-router.get('/:productId', (req, res, next) => {
+router.get('/:productId',(req, res, next) => {
     const id = req.params.productId;
-    Product.findById(id)
-    .exec()
-    .then(doc => {
-        console.log(doc);
-        if(doc) {
-            console.log("asddaad");
-            res.status(200).json(doc);
-        } else {
-            console.log("asddaad");
-            res.status(404).json({
-                message: 'No valid entry found for provider ID'
-            })
-        }
-    })
-    .catch(err => {
-        res.status(500).json({error: err})
-    })
+    console.log("TCL: id", id);
+    if(mongoose.Types.ObjectId.isValid(id)) {
+        Product.findById(id)
+        .exec()
+        .then(doc => {
+            console.log(doc);
+            if(doc) {
+                console.log("OK");
+                res.status(200).json(doc);
+            } else {
+                console.log("fail");
+                res.status(404).json({
+                    message: 'No valid entry found for provider ID'
+                })
+            }
+        })
+        .catch(err => {
+            console.log("catch");
+            res.status(500).json({error: err})
+        })
+    } else {
+        res.status(404).json({
+            message: 'Please provide correct Id type MongoDB'
+        })
+    }
+    
 });
 
 router.patch('/:productId', (req, res, next) => {
