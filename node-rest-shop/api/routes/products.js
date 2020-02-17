@@ -4,7 +4,6 @@ const router = express.Router();
 const Product = require('../models/product');
 const mongoose = require('mongoose');
 
-
 router.get('/', (req, res, next) => {
     Product.find()
     .select("name price _id")
@@ -135,7 +134,6 @@ router.patch('/:productId', (req, res, next) => {
 
 router.delete("/:productId", (req, res, next) => {
     const id = req.params.productId;
-    console.log("id",id);
     Product.remove({ _id: id })
     .exec()
     .then(result => {
